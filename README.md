@@ -51,3 +51,7 @@ The red arrows show the relationships between model, views and controller.
 [https://github.com/drewnoakes/metadata-extractor](https://github.com/drewnoakes/metadata-extractor)/
 
 [2] Erich Gamma, Richard Helm, Raplh Johnson, John Vlissides, _Design Patterns Element of Reusable Object-Oriented Software_, Pearson Education 2008 edizione italiana
+
+
+## License
+Licensed under the term of [MIT License](http://en.wikipedia.org/wiki/MIT_License). See attached file LICENSE.
