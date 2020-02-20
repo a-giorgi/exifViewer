@@ -1,5 +1,5 @@
 # Image + EXIF Viewer
-Overview
+**Overview**
 
 HCI 2019-2020
 Programming Assignment
