@@ -42,7 +42,7 @@ The red arrows show the relationships between model, views and controller.
 
 **2) Observer for notification.** to notify any status changes to the views, the Observer (pull) design pattern has been implemented. In particular, the &quot;aspect of notification&quot; variant documented in [2] (page 300) was used. This way it&#39;s possible to separately notify the two views while maintaining the link between model and the views abstract.
 
-**3) Singleton for Model**. To ensure that the model is loaded only once, the Singleton Design Pattern [2] is used.
+**3) Singleton for Model**. To ensure that the model is only loaded once, the Singleton Design Pattern [2] is used.
 
 **4) Exception management**. If the file is not available anymore, all fired exceptions are catched to allow the user to pick another file and continue using the software.
 
