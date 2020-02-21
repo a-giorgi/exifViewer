@@ -9,6 +9,8 @@ Programming Assignment
 
 This sofware is made in Java for Windows devices, and to be executed it requires the Java Runtime Environment ([https://www.java.com/it/download/](https://www.java.com/it/download/)) to be installed.
 
+This software is developed with IntelliJ Idea Community ([https://www.jetbrains.com/idea/](https://www.jetbrains.com/idea/))
+
 It follows the Model View Controller Paradigm and its made of:
 
 - a data structure containing the image to display and its rotation (model)
