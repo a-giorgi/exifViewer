@@ -26,14 +26,14 @@ The red arrows show the relationships between model, views and controller.
 
 -  **Visualization of images:** at the application startup, through a JFileChooser, the user can select a JPG image that will be displayed by the GUI. The image is resized up to a maximum of 512 pixels per side. This limit is defined within the Constants class in the utils package.
 -  **Visualization of image EXIF data:** the metadata are extracted through the use of the Java Extractor metadata library [1] and are displayed on the screen in a GUI view through the use of a JTable in a JScrollPane
--  **Rescaling:** the view containing the image supports resizing (however always setting the maximum limit at 512 pixels per side)
--  **Image rotation:** by pressing with the right mouse button on the image, the user can open a menu that allows the rotation by 90 ° to the right or left. In the same way, it&#39;s possible to carry out the same rotations by pressing the R (right rotation) and L (left rotation) keys
+-  **Rescaling:** the view containing the image supports resizing (however always setting the maximum limit at 512 pixels per side). The buttons are also resized and rearranged thanks to WrapLayout [3]
+-  **Image rotation:** by pressing with the right mouse button on the image, the user can open a menu that allows the rotation by 90 ° to the right or left. In the same way, it&#39;s possible to carry out the same rotations by pressing the R (right rotation) and L (left rotation) keys or the dedicated buttons
 
 
 **Extra Credits**
 
 -  **Geolocalization:** if the geolocation tags are available within the exif parameters, a button that allows to show the location on the browser (a Google Maps link is opened) is displayed under the metadata table. This is achieved using the class Gps Directory of metadata extractor.
--  **View multiple images:** the user can change the image by pressing the left mouse button on the displayed image.
+-  **View multiple images:** the user can change the image by pressing the "Change File" button.
 
 
 **Implementation**
@@ -53,6 +53,8 @@ The red arrows show the relationships between model, views and controller.
 [https://github.com/drewnoakes/metadata-extractor](https://github.com/drewnoakes/metadata-extractor)/
 
 [2] Erich Gamma, Richard Helm, Raplh Johnson, John Vlissides, _Design Patterns Element of Reusable Object-Oriented Software_, Pearson Education 2008 edizione italiana
+
+[3] WrapLayout Java Tips Weblog, https://tips4java.wordpress.com/2008/11/06/wrap-layout/
 
 
 ## License
