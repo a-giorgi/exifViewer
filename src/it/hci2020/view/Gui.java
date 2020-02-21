@@ -20,7 +20,7 @@ public class Gui{ //this is the wrapper for my views
     private JPanel metadataPanel;
 
     public Gui(Model model){
-         //setting up the wrapLayout on buttons
+        //setting up the wrapLayout on buttons
         buttonWrapper.setLayout(new WrapLayout());
 
         if(imagePanel instanceof ImageJPanel){
