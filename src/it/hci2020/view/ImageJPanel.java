@@ -11,16 +11,61 @@ import java.io.IOException;
 
 public class ImageJPanel extends JPanel implements Observer {
     private Model model;
+    private JPanel imageWrapper;
+    private JButton changeFile;
+    private JButton rotateLeft;
+    private JButton rotateRight;
 
-    public ImageJPanel(Model model){
+    public void setButtons(JButton changeFile,JButton rotateLeft,JButton rotateRight){
+        this.changeFile = changeFile;
+        this.rotateRight = rotateRight;
+        this.rotateLeft = rotateLeft;
+    }
+
+    public ImageJPanel(){
         super();
+    }
+
+    public JButton getChangeFile() {
+        return changeFile;
+    }
+
+    public JButton getRotateLeft() {
+        return rotateLeft;
+    }
+
+    public JButton getRotateRight() {
+        return rotateRight;
+    }
+
+    public void setImageWrapper(JPanel imageWrapper) {
+        this.imageWrapper = imageWrapper;
+    }
+
+    public JPanel getImageWrapper() {
+        return imageWrapper;
+    }
+
+
+    private void setMessage(String message){
+        imageWrapper.removeAll();
+        imageWrapper.add(new JLabel(message, JLabel.CENTER),BorderLayout.CENTER);
+        imageWrapper.revalidate();
+        this.revalidate();
+    }
+
+    public void setModel(Model model) {
         this.model = model;
     }
 
-    private void setMessage(String message){
-        this.removeAll();
-        this.add(new JLabel(message, JLabel.CENTER),BorderLayout.CENTER);
+    public void changeImage(JLabel label){
+        imageWrapper.removeAll();
+
+        //adding the image to this view
+        imageWrapper.add( label, BorderLayout.CENTER );
+        imageWrapper.revalidate();
         this.revalidate();
+
     }
 
     @Override
@@ -38,15 +83,13 @@ public class ImageJPanel extends JPanel implements Observer {
             //wrapping the image inside a JLabel
             ImageIcon image = new ImageIcon(scaledImage, model.getData().getAbsolutePath());
             JLabel label = new JLabel("", image, JLabel.CENTER);
+            imageWrapper.setLayout(new BorderLayout());
+            changeImage(label);
 
-            //adding the image to this view
-            this.removeAll();
-            this.setLayout(new BorderLayout());
-            this.add( label, BorderLayout.CENTER );
-            this.revalidate();
+
         } catch (IOException | IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
-            setMessage("Image not available anymore!");
+            setMessage("<html><b style=\"color:red\">Image not available anymore!</b></html>");
         }
 
     }

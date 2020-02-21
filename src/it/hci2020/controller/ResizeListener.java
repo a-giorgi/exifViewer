@@ -3,6 +3,7 @@ package it.hci2020.controller;
 import it.hci2020.model.Model;
 import it.hci2020.utils.Constants;
 import it.hci2020.utils.ImageProcessingUtils;
+import it.hci2020.view.ImageJPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -21,23 +22,23 @@ public class ResizeListener extends ComponentAdapter { //It's a part of the cont
     private int resizeDelay = 50;
     private Model model;
 
-    public void updateImagePanel(JPanel imagePanel) throws IOException, IllegalArgumentException {
+    public void updateImagePanel(JPanel imagePanel) throws IOException, IllegalArgumentException, ClassCastException {
         BufferedImage imageraw = ImageIO.read(model.getData());
-        int[] maxSizeAllowed = ImageProcessingUtils.getMaxAllowed(imagePanel);
-        if (model.getRotationDegrees() != 0) {
-            imageraw = ImageProcessingUtils.rotateImage(imageraw, model.getRotationDegrees());
+        if(imagePanel instanceof ImageJPanel) {
+            int[] maxSizeAllowed = ImageProcessingUtils.getMaxAllowed(((ImageJPanel) imagePanel).getImageWrapper());
+            if (model.getRotationDegrees() != 0) {
+                imageraw = ImageProcessingUtils.rotateImage(imageraw, model.getRotationDegrees());
+            }
+
+            //wrapping the image into a JLabel
+            ImageIcon scaledImage = new ImageIcon(ImageProcessingUtils.resizeImage(imageraw, maxSizeAllowed[0], maxSizeAllowed[1]), model.getData().getAbsolutePath());
+            JLabel label = new JLabel("", scaledImage, JLabel.CENTER);
+
+            //changing the image
+            ((ImageJPanel) imagePanel).changeImage(label);
+        }else{
+            throw new ClassCastException("imagePanel must be an ImageJPanel instance");
         }
-
-        //wrapping the image into a JLabel
-        ImageIcon scaledImage = new ImageIcon(ImageProcessingUtils.resizeImage(imageraw, maxSizeAllowed[0], maxSizeAllowed[1]), model.getData().getAbsolutePath());
-        JLabel label = new JLabel("", scaledImage, JLabel.CENTER);
-
-        //removing the old image
-        imagePanel.removeAll();
-
-        //adding the JLabel
-        imagePanel.add(label, BorderLayout.CENTER);
-        imagePanel.revalidate();
     }
 
     public ResizeListener(Model model){
@@ -51,10 +52,13 @@ public class ResizeListener extends ComponentAdapter { //It's a part of the cont
                     try {
                         updateImagePanel(imagePanel);
                     }catch (IOException exception){
-                        JOptionPane.showMessageDialog(imagePanel, "IOException: image not available anymore!");
+                        JOptionPane.showMessageDialog(imagePanel, "IOException: image not available anymore!","Error!",JOptionPane.ERROR_MESSAGE);
                         model.setData(null);
                     }catch (IllegalArgumentException exception){
-                        JOptionPane.showMessageDialog(imagePanel, "Click on the panel to select another file");
+                        JOptionPane.showMessageDialog(imagePanel, "Click on \"Change Image\" to select another file");
+                    }catch (ClassCastException exception){
+                        JOptionPane.showMessageDialog(imagePanel, exception.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
+                        System.exit(1);
                     }
                 }
             }
@@ -82,10 +86,13 @@ public class ResizeListener extends ComponentAdapter { //It's a part of the cont
         try {
             updateImagePanel(imagePanel);
         }catch (IOException exception){
-            JOptionPane.showMessageDialog(imagePanel, "IOException: image not available anymore!");
+            JOptionPane.showMessageDialog(imagePanel, "IOException: image not available anymore!","Error!",JOptionPane.ERROR_MESSAGE);
             model.setData(null);
         }catch (IllegalArgumentException exception){
-            JOptionPane.showMessageDialog(imagePanel, "Click on the panel to select another file");
+            JOptionPane.showMessageDialog(imagePanel, "Click on \"Change Image\" to select another file");
+        }catch (ClassCastException exception){
+            JOptionPane.showMessageDialog(imagePanel, exception.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
         }
     }
 }

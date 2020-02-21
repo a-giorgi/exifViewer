@@ -2,6 +2,7 @@ package it.hci2020.controller;
 
 import it.hci2020.model.Model;
 import it.hci2020.utils.FileUtils;
+import it.hci2020.view.ImageJPanel;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -16,7 +17,12 @@ public class ImageController {
         this.model = model;
         this.imageView = imageView;
         this.metadataView = metadataView;
-        setUpListeners();
+        try {
+            setUpListeners();
+        }catch(ClassCastException exception){
+            JOptionPane.showMessageDialog(null, exception.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
         if(!chooseFile(imageView)){
             System.exit(0);
         }
@@ -44,7 +50,7 @@ public class ImageController {
         }
     }
 
-    public void setUpListeners(){
+    public void setUpListeners() throws ClassCastException{
         //Resize Listener for resize the image when the frame is resized
         ResizeListener rs = new ResizeListener(model);
         imageView.addComponentListener(rs);
@@ -107,11 +113,38 @@ public class ImageController {
                     menu.show(e.getComponent(),e.getX(),e.getY());
                 }
                 //For the left click I'll allow the user to select another image with the JFileChooser
+                /** FUNCTION DISABLED use the provided button instead */
+                /*
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     chooseFile(imageView);
                 }
+                */
             }
         });
+
+        //setting up the button listeners
+        if(imageView instanceof ImageJPanel){
+            ((ImageJPanel)imageView).getChangeFile().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    chooseFile(imageView);
+                }
+            });
+            ((ImageJPanel)imageView).getRotateLeft().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    model.setRotationDegrees((-90 + model.getRotationDegrees())%360);
+                }
+            });
+            ((ImageJPanel)imageView).getRotateRight().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    model.setRotationDegrees((90 + model.getRotationDegrees())%360);
+                }
+            });
+        }else{
+            throw new ClassCastException("imagePanel must be an ImageJPanel instance!");
+        }
     }
 
 

@@ -24,15 +24,19 @@ public class MetadataJPanel extends JPanel implements Observer {
     private String mapsUrl = null;
     private JTable metadataTable;
 
-    public MetadataJPanel(Model model){
+    public MetadataJPanel(){
         super();
-        this.model = model;
     }
 
     private void setMessage(String message){
         this.removeAll();
         this.add(new JLabel(message, JLabel.CENTER),BorderLayout.CENTER);
         this.revalidate();
+
+    }
+
+    public void setModel(Model model){
+        this.model = model;
     }
 
 

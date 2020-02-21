@@ -11,7 +11,57 @@
         <constraints border-constraint="Center"/>
         <properties/>
         <border type="none"/>
-        <children/>
+        <children>
+          <grid id="bd51a" binding="imagePanel" custom-create="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <tabbedpane title="Image Viewer"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="22ad0" binding="buttonWrapper" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints border-constraint="North"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="18aba" class="javax.swing.JButton" binding="changeFile">
+                    <constraints/>
+                    <properties>
+                      <horizontalTextPosition value="2"/>
+                      <text value="Change Image"/>
+                    </properties>
+                  </component>
+                  <component id="11a3a" class="javax.swing.JButton" binding="rotateLeft">
+                    <constraints/>
+                    <properties>
+                      <text value="Rotate 90° Left"/>
+                    </properties>
+                  </component>
+                  <component id="67840" class="javax.swing.JButton" binding="rotateRight">
+                    <constraints/>
+                    <properties>
+                      <text value="Rotate 90° Right"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="14196" binding="imageWrapper" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </grid>
+          <grid id="72202" binding="metadataPanel" custom-create="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <tabbedpane title="Metadata Viewer"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
       </tabbedpane>
     </children>
   </grid>

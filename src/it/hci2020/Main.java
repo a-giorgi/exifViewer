@@ -13,7 +13,6 @@ public class Main {
     public static void main(String[] args){
 
         Model model = Model.getInstance();
-
         Gui gui = new Gui(model);
         JFrame frame = new JFrame("ImageExifViewer");
         frame.setContentPane(gui.getTabbedPane1());
