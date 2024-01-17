@@ -1,9 +1,6 @@
 # Image + EXIF Viewer
 **Overview**
 
-HCI 2019-2020
-Programming Assignment
-
 ![viewer.png](/images/viewer.png)
 
 
