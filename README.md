@@ -21,7 +21,7 @@ It follows the Model View Controller Paradigm and its made of:
 The red arrows show the relationships between model, views and controller.
 
 
-**Assignment Goals:**
+**Interesting features:**
 
 -  **Visualization of images:** at the application startup, through a JFileChooser, the user can select a JPG image that will be displayed by the GUI. The image is resized up to a maximum of 512 pixels per side. This limit is defined within the Constants class in the utils package.
 -  **Visualization of image EXIF data:** the metadata are extracted through the use of the Java Extractor metadata library [1] and are displayed on the screen in a GUI view through the use of a JTable in a JScrollPane
